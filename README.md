@@ -1,15 +1,129 @@
-<!DOCTYPE html> <html lang="gu"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>મારી વેબસાઈટ</title> <style> * { margin: 0; padding: 0; box-sizing: border-box; } body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; } /* હેડર અને નેવિગેશન */ header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 1rem 0; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); } .navbar { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 2rem; } .logo { font-size: 1.8rem; font-weight: bold; display: flex; align-items: center; gap: 0.5rem; } .logo-icon { width: 40px; height: 40px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #667eea; font-weight: bold; } nav ul { display: flex; list-style: none; gap: 2rem; } nav a { color: white; text-decoration: none; transition: opacity 0.3s; font-weight: 500; } nav a:hover { opacity: 0.8; } /* હીરો સેક્શન */ .hero { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 100px 2rem; text-align: center; min-height: 600px; display: flex; align-items: center; justify-content: center; } .hero-content { max-width: 800px; } .hero h1 { font-size: 3rem; margin-bottom: 1rem; animation: slideDown 0.8s ease; } .hero p { font-size: 1.3rem; margin-bottom: 2rem; opacity: 0.95; animation: slideUp 0.8s ease 0.2s both; } .cta-button { display: inline-block; background: white; color: #667eea; padding: 12px 40px; border-radius: 50px; text-decoration: none; font-weight: bold; transition: transform 0.3s, box-shadow 0.3s; animation: slideUp 0.8s ease 0.4s both; } .cta-button:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); } /* એનિમેશન્સ */ @keyframes slideDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } } @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } } /* મોબાઈલ રેસ્પોન્સિવ */ @media (max-width: 768px) { nav ul { gap: 1rem; } .hero h1 { font-size: 2rem; } .hero p { font-size: 1rem; } .navbar { padding: 0 1rem; } } </style> </head> <body> <!-- હેડર અને નેવિગેશન --> <header> <div class="navbar"> <div class="logo"> <div class="logo-icon">🚀</div> <span>મારી વેબસાઈટ</span> </div> <nav> <ul> <li><a href="#home"    <h2>Login</h2>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PK Gamer</title>
 
-    <input type="email" placeholder="Gmail દાખલ કરો"><br><br>
+<style>
+body{
+    margin:0;
+    background:#111;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+}
 
-    <input type="password" placeholder="Password"><br><br>
+h1{
+    color:cyan;
+}
 
-    <button>Login</button>
->હોમ</a></li> <li><a href="#about">વિશે</a></li> <li><a href="#services">સેવાઓ</a></li> <li><a href="#contact">સંપર્ક</a></li> </ul> </nav> </div> </header> <!-- હીરો સેક્શન --> <section class="hero" id="home"> <div class="hero-content"> <h1>નમસ્તે તમારું મહાવિર પપકોણ માં હાર્દિક સ્વાગત છે </h1> <p>આમારે ત્યાં મસાલે દાર પપકોણ બનાવી ને વેચવા માં આવે છે જેવા કે. મસાલા પપકોણ, તીખા પપકોણ, ખટા પપકોણ વગેરે તમારી માટે બનાવી રહ્યા છીએ।</p> <a href="#contact" class="cta-button">આજે શરુ કરો</a> </div> </section> <section id="login" style="padding:100px;text-align:center;">
-    <h2>Login</h2>
+#game{
+    width:100%;
+    height:400px;
+    background:#222;
+    position:relative;
+    overflow:hidden;
+}
 
-    <input type="email" placeholder="Gmail દાખલ કરો"><br><br>
+#player{
+    width:50px;
+    height:50px;
+    background:red;
+    position:absolute;
+    left:50px;
+    top:175px;
+}
 
-    <input type="password" placeholder="Password"><br><br>
+.enemy{
+    width:40px;
+    height:40px;
+    background:yellow;
+    position:absolute;
+}
+</style>
+</head>
 
-    <button>Login</button>
+<body>
+
+<h1>🎮 PK Gamer</h1>
+
+<h2>Score: <span id="score">0</span></h2>
+
+<div id="game">
+    <div id="player"></div>
+</div>
+
+<p>
+⬅️➡️⬆️⬇️ થી Player હલાવો
+</p>
+
+<script>
+
+let player = document.getElementById("player");
+let game = document.getElementById("game");
+let score = 0;
+
+let x = 50;
+let y = 175;
+
+document.addEventListener("keydown", function(e){
+
+    if(e.key=="ArrowLeft") x-=20;
+    if(e.key=="ArrowRight") x+=20;
+    if(e.key=="ArrowUp") y-=20;
+    if(e.key=="ArrowDown") y+=20;
+
+    player.style.left = x + "px";
+    player.style.top = y + "px";
+});
+
+function createEnemy(){
+
+    let enemy = document.createElement("div");
+    enemy.className="enemy";
+
+    enemy.style.left="750px";
+    enemy.style.top=Math.random()*350+"px";
+
+    game.appendChild(enemy);
+
+    let pos=750;
+
+    let move=setInterval(function(){
+
+        pos-=5;
+        enemy.style.left=pos+"px";
+
+        let ex=enemy.offsetLeft;
+        let ey=enemy.offsetTop;
+
+        let px=player.offsetLeft;
+        let py=player.offsetTop;
+
+        if(
+           ex<px+50 &&
+           ex+40>px &&
+           ey<py+50 &&
+           ey+40>py
+        ){
+            score++;
+            document.getElementById("score").innerHTML=score;
+            enemy.remove();
+            clearInterval(move);
+        }
+
+        if(pos<0){
+            enemy.remove();
+            clearInterval(move);
+        }
+
+    },20);
+}
+
+setInterval(createEnemy,1500);
+
+</script>
+
+</body>
+</html>
