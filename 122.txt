@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PK Gamer</title>
+
+<style>
+body{
+    margin:0;
+    background:#111;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+}
+
+h1{
+    color:cyan;
+}
+
+#game{
+    width:100%;
+    height:400px;
+    background:#222;
+    position:relative;
+    overflow:hidden;
+}
+
+#player{
+    width:50px;
+    height:50px;
+    background:red;
+    position:absolute;
+    left:50px;
+    top:175px;
+}
+
+.enemy{
+    width:40px;
+    height:40px;
+    background:yellow;
+    position:absolute;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🎮 PK Gamer</h1>
+
+<h2>Score: <span id="score">0</span></h2>
+
+<div id="game">
+    <div id="player"></div>
+</div>
+
+<p>
+⬅️➡️⬆️⬇️ થી Player હલાવો
+</p>
+
+<script>
+
+let player = document.getElementById("player");
+let game = document.getElementById("game");
+let score = 0;
+
+let x = 50;
+let y = 175;
+
+document.addEventListener("keydown", function(e){
+
+    if(e.key=="ArrowLeft") x-=20;
+    if(e.key=="ArrowRight") x+=20;
+    if(e.key=="ArrowUp") y-=20;
+    if(e.key=="ArrowDown") y+=20;
+
+    player.style.left = x + "px";
+    player.style.top = y + "px";
+});
+
+function createEnemy(){
+
+    let enemy = document.createElement("div");
+    enemy.className="enemy";
+
+    enemy.style.left="750px";
+    enemy.style.top=Math.random()*350+"px";
+
+    game.appendChild(enemy);
+
+    let pos=750;
+
+    let move=setInterval(function(){
+
+        pos-=5;
+        enemy.style.left=pos+"px";
+
+        let ex=enemy.offsetLeft;
+        let ey=enemy.offsetTop;
+
+        let px=player.offsetLeft;
+        let py=player.offsetTop;
+
+        if(
+           ex<px+50 &&
+           ex+40>px &&
+           ey<py+50 &&
+           ey+40>py
+        ){
+            score++;
+            document.getElementById("score").innerHTML=score;
+            enemy.remove();
+            clearInterval(move);
+        }
+
+        if(pos<0){
+            enemy.remove();
+            clearInterval(move);
+        }
+
+    },20);
+}
+
+setInterval(createEnemy,1500);
+
+</script>
+
+</body>
+</html>
